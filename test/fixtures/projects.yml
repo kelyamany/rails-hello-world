@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  [name: MyString
+  number: 1
+  city: MyString
+  start: 2020-03-06 20:16:19
+  end: 
+
+two:
+  [name: MyString
+  number: 1
+  city: MyString
+  start: 2020-03-06 20:16:19
+  end: 
