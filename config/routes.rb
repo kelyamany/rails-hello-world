@@ -1,4 +1,4 @@
-Rails.application.routes.draw defaults: {format: "json"} do
+Rails.application.routes.draw do
   get 'projects/index'
   get 'projects/show'
   get 'projects/new'
