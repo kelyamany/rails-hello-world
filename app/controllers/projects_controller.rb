@@ -1,5 +1,13 @@
 class ProjectsController < ApplicationController
   def index
+    render json: {
+        projects: [
+            {
+                name: "test",
+                number: 3
+            }
+        ]
+    }.to_json
   end
 
   def show
