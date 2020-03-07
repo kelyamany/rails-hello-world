@@ -7,7 +7,7 @@ class Projects extends React.Component {
       projects: []
     };
   }  componentDidMount(){
-    fetch('/projects/index.json')
+    fetch('/projects/index')
         .then((response) => {return response.json()})
         .then((data) => {this.setState({ projects: data }) });
   }
