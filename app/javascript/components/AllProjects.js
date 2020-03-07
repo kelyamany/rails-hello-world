@@ -11,6 +11,7 @@ const allProjects = (props) => {
               <p>{project.weather}</p>
               <p>{project.start}</p>
           <p>{project.end}</p>
+              <button onClick={() => props.handleDelete(project.id)}>Delete</button>
           </div>
     )
     })

@@ -10,6 +10,8 @@ class Projects extends React.Component {
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.addNewProject = this.addNewProject.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.deleteProject = this.deleteProject.bind(this)
   }
 
   addNewProject(project){
@@ -37,14 +39,30 @@ class Projects extends React.Component {
         .then((project)=>{
           this.addNewProject(project)
         })
-
   }
 
+  handleDelete(id){
+    fetch(`projects/destroy/${id}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then((response) => {
+      this.deleteProject(id)
+    })
+  }
+  deleteProject(id){
+   let newProjects = this.state.projects.filter((project) => project.id !== id);
+    this.setState({
+      projects: newProjects
+    })
+  }
   render(){
     return(
         <div>
           <NewProject handleFormSubmit={this.handleFormSubmit}/>
-          <AllProjects projects={this.state.projects} />
+          <AllProjects projects={this.state.projects} handleDelete={this.handleDelete}/>
         </div>
     )
   }
