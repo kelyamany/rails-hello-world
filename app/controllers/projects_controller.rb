@@ -14,6 +14,7 @@ class ProjectsController < ApplicationController
       city = project_json['city']
       # TODO: (Performance) Find out a way to make the request for unique cities
       # TODO: (Performance) Find out a way to perform the operation asynchronously
+      # TODO: (Performance) Cache these values for one day
       temp = get_weather(city).to_f
       project = project_json.merge({'weather': (temp - 273.15).round})
       @projects << project
