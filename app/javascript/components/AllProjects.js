@@ -2,6 +2,8 @@ import React from "react"
 import PropTypes from "prop-types"
 
 const allProjects = (props) => {
+
+    // TODO: Separate the block where the project is rendered into a separate .js file
     var projects = props.projects.map((project) => {
       return(
           <div key={project.id}>
