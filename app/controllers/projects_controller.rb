@@ -7,15 +7,19 @@ class ProjectsController < ApplicationController
   def index
     @projects_table = Project.all
     @projects= []
+
+    #TODO: Optimize the loop by giving up the additional list
     @projects_table.each do |project|
       project_json = JSON.parse(project.to_json)
       city = project_json['city']
-      # TODO: Find out a way to make the request for unique cities
-      # TODO: Find out a way to perform the operation asynchronously
+      # TODO: (Performance) Find out a way to make the request for unique cities
+      # TODO: (Performance) Find out a way to perform the operation asynchronously
       temp = get_weather(city).to_f
       project = project_json.merge({'weather': (temp - 273.15).round})
       @projects << project
     end
+
+    # TODO: render and handle 'project.fields' as json
     render json: @projects
   end
 
