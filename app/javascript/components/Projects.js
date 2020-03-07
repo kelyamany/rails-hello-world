@@ -8,8 +8,14 @@ class Projects extends React.Component {
     this.state = {
       projects: []
     };
-    this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.addNewProject = this.addNewProject.bind(this);
+  }
 
+  addNewProject(project){
+    this.setState({
+      projects: this.state.projects.concat(project)
+    })
   }
 
   componentDidMount(){
@@ -18,8 +24,20 @@ class Projects extends React.Component {
         .then((data) => {this.setState({ projects: data }) });
   }
 
-  handleFormSubmit(name){
-    console.log(name)
+  handleFormSubmit(name, number, city){
+    let body = JSON.stringify({project: {name: name, number:   number, city: city, start: Date.now(), end: Date.now()} })
+
+    fetch('/projects/new', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: body,
+    }).then((response) => {return response.json()})
+        .then((project)=>{
+          this.addNewProject(project)
+        })
+
   }
 
   render(){
