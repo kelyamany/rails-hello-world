@@ -27,7 +27,7 @@ class Projects extends React.Component {
   }
 
   handleFormSubmit(name, number, city){
-    let body = JSON.stringify({project: {name: name, number:   number, city: city, start: Date.now(), end: Date.now()} })
+    let body = JSON.stringify({project: {name: name, number:   number, city: city, start: Date.now(), end: Date.now()}});
 
     fetch('/projects', {
       method: 'POST',
@@ -42,14 +42,17 @@ class Projects extends React.Component {
   }
 
   handleDelete(id){
-    fetch(`projects/${id}`,
+    fetch(`/projects/${id}`,
         {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json'
           }
         }).then((response) => {
-      this.deleteProject(id)
+            if (response.ok)
+            {
+                this.deleteProject(id);
+            }
     })
   }
   deleteProject(id){
