@@ -29,18 +29,9 @@ class ProjectsController < ApplicationController
     json['main']['temp']
   end
 
-  def show
-  end
-
-  def new
-  end
-
   def create
     project = Project.create(project_args)
     render json: project
-  end
-
-  def edit
   end
 
   def update
