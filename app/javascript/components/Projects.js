@@ -1,35 +1,34 @@
 import React from "react"
 import PropTypes from "prop-types"
+import AllProjects from "./AllProjects";
+import NewProject from "./NewProject";
 class Projects extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       projects: []
     };
-  }  componentDidMount(){
+    this.handleFormSubmit = this.handleFormSubmit.bind(this)
+
+  }
+
+  componentDidMount(){
     fetch('/projects/index')
         .then((response) => {return response.json()})
         .then((data) => {this.setState({ projects: data }) });
   }
 
-  render(){
-    var projects = this.state.projects.map((project) => {
-      return(
-          <div key={project.id}>
-          <h1>{project.name}</h1>
-          <p>{project.number}</p>
-          <p>{project.city}</p>
-          <p>{project.start}</p>
-          <p>{project.end}</p>
-          </div>
-    )
-    })
+  handleFormSubmit(name){
+    console.log(name)
+  }
 
+  render(){
     return(
         <div>
-        {projects}
+          <NewProject handleFormSubmit={this.handleFormSubmit}/>
+          <AllProjects projects={this.state.projects} />
         </div>
-  )
+    )
   }
 }
 
