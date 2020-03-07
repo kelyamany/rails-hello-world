@@ -21,7 +21,7 @@ class Projects extends React.Component {
   }
 
   componentDidMount(){
-    fetch('/projects/index')
+    fetch('/projects')
         .then((response) => {return response.json()})
         .then((data) => {this.setState({ projects: data }) });
   }
@@ -29,7 +29,7 @@ class Projects extends React.Component {
   handleFormSubmit(name, number, city){
     let body = JSON.stringify({project: {name: name, number:   number, city: city, start: Date.now(), end: Date.now()} })
 
-    fetch('/projects/new', {
+    fetch('/projects', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ class Projects extends React.Component {
   }
 
   handleDelete(id){
-    fetch(`projects/destroy/${id}`,
+    fetch(`projects/${id}`,
         {
           method: 'DELETE',
           headers: {
