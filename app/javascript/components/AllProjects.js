@@ -8,7 +8,8 @@ const allProjects = (props) => {
           <h1>{project.name}</h1>
           <p>{project.number}</p>
           <p>{project.city}</p>
-          <p>{project.start}</p>
+              <p>{project.weather}</p>
+              <p>{project.start}</p>
           <p>{project.end}</p>
           </div>
     )
