@@ -28,8 +28,24 @@ jobs:
       with:
         ruby-version: 2.7
         bundler-cache: true
-    - name: Set up Sqlite
-      run: sudo apt-get update && sudo apt-get install libsqlite3-dev
+    - name: Cache Sqlite
+      uses: actions/cache@v1.0.3
+      id: cache-Sqlite
+      with:
+        path: "~/libsqlite3-dev"
+        key: ${{secrets.SQLITE_VERSION}}
+    - name: Install Sqlite
+      env:
+        CACHE_HIT: ${{steps.cache-Sqlite.outputs.cache-hit}}
+        VALGRIND_VERSION: ${{secrets.SQLITE_VERSION}}
+        run: |
+          if [[ "$CACHE_HIT" == 'true' ]]; then
+            sudo cp --verbose --force --recursive ~/libsqlite3-dev/* /
+          else
+            sudo apt-get install --yes libsqlite3-dev="$SQLITE_VERSION"
+          mkdir -p ~/libsqlite3-dev
+            sudo dpkg -L libsqlite3-dev | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ~/libsqlite3-dev/
+          fi
     - name: Install dependencies
       run: bundle install
     - name: Run tests
