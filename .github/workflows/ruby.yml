@@ -28,8 +28,8 @@ jobs:
       with:
         ruby-version: 2.7
         bundler-cache: true
-    - name: Install Sqllite3
-      run: sudo apt-get install libsqlite3-dev
+    - name: Set up Sqlite
+      run: sudo apt-get update && sudo apt-get install libsqlite3-dev
     - name: Install dependencies
       run: bundle install
     - name: Run tests
